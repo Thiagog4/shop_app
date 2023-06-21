@@ -55,8 +55,12 @@ class CartPage extends StatelessWidget {
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      Provider.of<OrderList>(context, listen: false)
-                          .addOrder(cart);
+                      if (cart.itemCount >= 1) {
+                        Provider.of<OrderList>(
+                          context,
+                          listen: false,
+                        ).addOrder(cart);
+                      }
                       cart.clear();
                     },
                     style: TextButton.styleFrom(
