@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/product.dart';
@@ -29,6 +27,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
     _imageUrlFocus.addListener(updateImage);
   }
 
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
@@ -141,6 +140,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 onFieldSubmitted: (_) {
                   FocusScope.of(context).requestFocus(_descriptionFocus);
                 },
+                // ignore: no_leading_underscores_for_local_identifiers
                 validator: (_price) {
                   final priceString = _price ?? '-1';
                   final price = double.tryParse(priceString) ?? -1;
@@ -164,6 +164,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 focusNode: _descriptionFocus,
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
+                // ignore: body_might_complete_normally_nullable, no_leading_underscores_for_local_identifiers
                 validator: (_description) {
                   final description = _description ?? '';
 
