@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/app_drawer.dart';
 import 'package:shop/components/badgee.dart';
+import 'package:shop/utils/app_routes.dart';
 import '../components/product_grid.dart';
 import '../models/cart.dart';
 
@@ -11,14 +13,14 @@ enum FilterOptions {
   All,
 }
 
-class ProductsOverviewPagge extends StatefulWidget {
-  const ProductsOverviewPagge({super.key});
+class ProductsOverviewPage extends StatefulWidget {
+  const ProductsOverviewPage({super.key});
 
   @override
-  State<ProductsOverviewPagge> createState() => _ProductsOverviewPaggeState();
+  State<ProductsOverviewPage> createState() => _ProductsOverviewPageState();
 }
 
-class _ProductsOverviewPaggeState extends State<ProductsOverviewPagge> {
+class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
   bool _showFavoriteOnly = false;
 
   @override
@@ -52,7 +54,9 @@ class _ProductsOverviewPaggeState extends State<ProductsOverviewPagge> {
           ),
           Consumer<Cart>(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART);
+              },
               icon: const Icon(Icons.shopping_cart),
             ),
             builder: (ctx, cart, child) => badgee(
@@ -63,6 +67,7 @@ class _ProductsOverviewPaggeState extends State<ProductsOverviewPagge> {
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),
+      drawer: const AppDrawer(),
     );
   }
 }

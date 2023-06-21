@@ -4,7 +4,10 @@ import 'package:shop/models/cart.dart';
 import 'package:shop/pages/product_detail_page.dart';
 import 'package:shop/utils/app_routes.dart';
 
+import 'models/order_list.dart';
 import 'models/product_list.dart';
+import 'pages/cart_page.dart';
+import 'pages/orders_page.dart';
 import 'pages/products_overview_page.dart';
 
 void main() {
@@ -25,6 +28,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => Cart(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => OrderList(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -33,9 +39,11 @@ class MyApp extends StatelessWidget {
           hintColor: Colors.deepOrange,
           fontFamily: 'Lato',
         ),
-        home: const ProductsOverviewPagge(),
         routes: {
+          AppRoutes.HOME: (ctx) => const ProductsOverviewPage(),
           AppRoutes.PRODUCT_DETAIL: (ctx) => const ProductDetailPage(),
+          AppRoutes.CART: (ctx) => const CartPage(),
+          AppRoutes.ORDERS: (ctx) => const OrdersPage(),
         },
         debugShowCheckedModeBanner: false,
       ),
