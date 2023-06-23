@@ -40,6 +40,8 @@ Clone the project with git clone and...
 - HTTP Requests
 - Authentication
 - Animation
+- Firebase
+
 
 ## Images
 ### Login Screen
