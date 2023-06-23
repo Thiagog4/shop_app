@@ -12,6 +12,7 @@ import 'models/product_list.dart';
 import 'pages/cart_page.dart';
 import 'pages/orders_page.dart';
 import 'pages/products_page.dart';
+import 'utils/custom_route.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +56,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           hintColor: Colors.deepOrange,
           fontFamily: 'Lato',
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CustomPageTransitionBuilder(),
+              TargetPlatform.iOS: CustomPageTransitionBuilder(),
+            },
+          ),
         ),
         routes: {
           AppRoutes.AUTH_OR_HOME: (ctx) => const AuthOrHomePage(),
