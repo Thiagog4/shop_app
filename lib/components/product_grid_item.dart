@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/models/auth.dart';
+import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
-
-import '../models/auth.dart';
-import '../models/cart.dart';
-import '../utils/app_routes.dart';
+import 'package:shop/utils/app_routes.dart';
 
 class ProductGridItem extends StatelessWidget {
-  const ProductGridItem({super.key});
+  const ProductGridItem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +20,16 @@ class ProductGridItem extends StatelessWidget {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
-            builder: (ctz, product, _) => IconButton(
+            builder: (ctx, product, _) => IconButton(
               onPressed: () {
-                product.toggleFavorite(auth.token ?? '', auth.uid ?? '');
+                product.toggleFavorite(
+                  auth.token ?? '',
+                  auth.uid ?? '',
+                );
               },
               icon: Icon(
                   product.isFavorite ? Icons.favorite : Icons.favorite_border),
-              color: Theme.of(context).hintColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
           title: Text(
@@ -35,8 +37,9 @@ class ProductGridItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            color: Theme.of(context).colorScheme.secondary,
             onPressed: () {
-              cart.addItem(product);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -50,16 +53,24 @@ class ProductGridItem extends StatelessWidget {
                   ),
                 ),
               );
+              cart.addItem(product);
             },
-            icon: const Icon(Icons.shopping_cart),
-            color: Theme.of(context).hintColor,
           ),
         ),
         child: GestureDetector(
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
+          child: Hero(
+            tag: product.id,
+            child: FadeInImage(
+              placeholder:
+                  const AssetImage('assets/images/product-placeholder.png'),
+              image: NetworkImage(product.imageUrl),
+              fit: BoxFit.cover,
+            ),
           ),
+          // child: Image.network(
+          //   product.imageUrl,
+          //   fit: BoxFit.cover,
+          // ),
           onTap: () {
             Navigator.of(context).pushNamed(
               AppRoutes.PRODUCT_DETAIL,

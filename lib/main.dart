@@ -32,7 +32,10 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductList(),
           update: (ctx, auth, previous) {
             return ProductList(
-                auth.token ?? '', previous?.items ?? [], auth.uid ?? '');
+              auth.token ?? '',
+              auth.uid ?? '',
+              previous?.items ?? [],
+            );
           },
         ),
         ChangeNotifierProvider(
