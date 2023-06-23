@@ -61,7 +61,7 @@ class Auth with ChangeNotifier {
         ),
       );
 
-      Store.SaveMap('userData', {
+      Store.saveMap('userData', {
         'token': _token,
         'email': _email,
         'uid': _uid,

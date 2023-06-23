@@ -8,7 +8,7 @@ class Store {
     prefs.setString(key, value);
   }
 
-  static Future<bool> SaveMap(String key, Map<String, dynamic> value) async {
+  static Future<bool> saveMap(String key, Map<String, dynamic> value) async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.setString(key, jsonEncode(value));
   }
@@ -21,7 +21,7 @@ class Store {
 
   static Future<Map<String, dynamic>> getMap(String key) async {
     try {
-      return jsonDecode(await getString(key) ?? '{}');
+      return jsonDecode(await getString(key));
     } catch (e) {
       return {};
     }

@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_final_fields
+// ignore_for_file: no_leading_underscores_for_local_identifiers, prefer_final_fields, constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
